@@ -23,7 +23,7 @@ public static class Util
 
         if(heightRate > 0.0f)
         {
-            localScale.y = (Screen.height * heightRate) / spriteRenderer.bounds.size.y;
+            localScale.y = (Screen.height * heightRate) / (spriteRenderer.bounds.size.y * 100.0f);
             if(widthRate < 0.0f)
             {
                 localScale.x = localScale.y;
