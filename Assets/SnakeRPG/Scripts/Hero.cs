@@ -41,7 +41,7 @@ public class Hero : MonoBehaviour {
     }
 
     void Move() {
-        var motion = Vector3.up * 0.05f;
+        var motion = Vector3.up * 0.075f;
         if (Input.touchCount > 0)
         {
             var touch = Input.touches[0];
@@ -57,8 +57,8 @@ public class Hero : MonoBehaviour {
         }
         GetComponent<CharacterController>().Move(motion);
 
-        float halfScreenWidth = Screen.width / 2 * 0.01f;
-        float halfSpriteWidth = GetComponent<SpriteRenderer>().sprite.bounds.size.x / 2 * 0.01f;
+        float halfScreenWidth = Util.ScreenWidth() / 2;
+        float halfSpriteWidth = GetComponent<SpriteRenderer>().sprite.bounds.size.x / 2;
         if (transform.position.x < - halfScreenWidth + halfSpriteWidth) {
             var position = transform.position;
             position.x = - halfScreenWidth + halfSpriteWidth;
@@ -76,7 +76,7 @@ public class Hero : MonoBehaviour {
         {
             var slider = GameObject.Find("Slider (1)");
             slider.GetComponent<Slider>().value = mAttackTime / 1.0f;
-            slider.transform.position = GameObject.Find("Main Camera").GetComponent<Camera>().WorldToScreenPoint(transform.position - Vector3.up * Screen.width / 5 * 0.01f * 0.5f);
+            slider.transform.position = GameObject.Find("Main Camera").GetComponent<Camera>().WorldToScreenPoint(transform.position - Vector3.up * Util.ScreenWidth() / 5 * 0.5f);
         }
 
         if (mAttackTime >= 1.0f) {
@@ -87,7 +87,7 @@ public class Hero : MonoBehaviour {
 
 	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
-        if (hit.normal.y < 0.5f) {
+        if (hit.normal.y < -0.5f) {
             if (mTargetEnemy != hit.gameObject) {
                 mAttackTime = 0.0f;
                 mTargetEnemy = hit.gameObject;

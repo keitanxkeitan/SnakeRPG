@@ -14,7 +14,7 @@ public static class Util
 
         if(widthRate > 0.0f)
         {
-            localScale.x = (Screen.width * widthRate) / (spriteRenderer.bounds.size.x * 100.0f);
+            localScale.x = (ScreenWidth() * widthRate) / (spriteRenderer.bounds.size.x);
             if(heightRate <= 0.0f)
             {
                 localScale.y = localScale.x;
@@ -23,7 +23,7 @@ public static class Util
 
         if(heightRate > 0.0f)
         {
-            localScale.y = (Screen.height * heightRate) / (spriteRenderer.bounds.size.y * 100.0f);
+            localScale.y = (ScreenHeight() * heightRate) / (spriteRenderer.bounds.size.y);
             if(widthRate < 0.0f)
             {
                 localScale.x = localScale.y;
@@ -34,19 +34,29 @@ public static class Util
     }
 
     public static float ConvertColumnToPositionX(int column) {
-        float width = Screen.width / 5 * 0.01f;
+        float width = ScreenWidth() / 5;
         return - width * 2 + width * column;
     }
 
     public static int ConvertPositionYToRow(float positionY)
     {
-        float height = Screen.width / 5 * 0.01f;
+        float height = ScreenWidth() / 5;
         return (int)Mathf.Floor(positionY / height);
     }
 
     public static float ConvertRowToPositionY(int row)
     {
-        float height = Screen.width / 5 * 0.01f;
+        float height = ScreenWidth() / 5;
         return height * row;
+    }
+
+    public static float ScreenHeight()
+    {
+        return Camera.main.orthographicSize * 2.0f;
+    }
+
+    public static float ScreenWidth()
+    {
+        return ScreenHeight() / Screen.height * Screen.width;
     }
 }

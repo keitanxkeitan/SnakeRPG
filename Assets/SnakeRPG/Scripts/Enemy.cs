@@ -15,8 +15,6 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Util.ResizeGameObjectAccordingToResolution(gameObject, 0.2f);
-
         mAttackTime = 0.0f;
 	}
 	
@@ -37,6 +35,7 @@ public class Enemy : MonoBehaviour {
         Debug.Assert(enemySpriteHolder);
         GetComponent<SpriteRenderer>().sprite = enemySpriteHolder.GetSprite(type);
         mParameters = EnemyDefine.GetParameters(type);
+        Util.ResizeGameObjectAccordingToResolution(gameObject, 0.2f);
     }
 
     void SelfDestroy() {
@@ -53,7 +52,7 @@ public class Enemy : MonoBehaviour {
         if (mAttackTime > 0.0f) {
             var slider = GameObject.Find("Slider");
             slider.GetComponent<Slider>().value = mAttackTime / mParameters.mAttackTime;
-            slider.transform.position = GameObject.Find("Main Camera").GetComponent<Camera>().WorldToScreenPoint(transform.position + Vector3.up * Screen.width / 5 * 0.01f * 0.5f);
+            slider.transform.position = GameObject.Find("Main Camera").GetComponent<Camera>().WorldToScreenPoint(transform.position + Vector3.up * Util.ScreenWidth() / 5 * 0.5f);
         }
 
         if (mAttackTime >= mParameters.mAttackTime) {
