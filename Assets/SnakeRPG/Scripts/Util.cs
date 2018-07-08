@@ -32,4 +32,21 @@ public static class Util
 
         gameObject.transform.localScale = localScale;
     }
+
+    public static float ConvertColumnToPositionX(int column) {
+        float width = Screen.width / 5 * 0.01f;
+        return - width * 2 + width * column;
+    }
+
+    public static int ConvertPositionYToRow(float positionY)
+    {
+        float height = Screen.width / 5 * 0.01f;
+        return (int)Mathf.Floor(positionY / height);
+    }
+
+    public static float ConvertRowToPositionY(int row)
+    {
+        float height = Screen.width / 5 * 0.01f;
+        return height * row;
+    }
 }
